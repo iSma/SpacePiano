@@ -13,7 +13,7 @@ object HeadlessLauncher {
 
     private fun createApplication(): Application {
         // Note: you can use a custom ApplicationListener implementation for the headless project instead of Game.
-        return HeadlessApplication(Game(), defaultConfiguration)
+        return HeadlessApplication(Game, defaultConfiguration)
     }
 
     private // When this value is negative, Game#render() is never called.

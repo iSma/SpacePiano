@@ -1,10 +1,21 @@
 package io.spacepiano
 
 import com.badlogic.gdx.Game
-import io.spacepiano.FirstScreen
+import com.badlogic.gdx.Gdx
+import io.spacepiano.screens.LoadingScreen
+import io.spacepiano.screens.Screen
 
-class Game : Game() {
+object  Game : Game() {
     override fun create() {
-        setScreen(FirstScreen())
+        setScreen(LoadingScreen())
+    }
+
+    override fun setScreen(screen: com.badlogic.gdx.Screen?) {
+        super.setScreen(screen)
+        Gdx.app.log("setScreen", screen?.javaClass?.simpleName)
+        Gdx.input.inputProcessor = when (screen) {
+            is Screen -> screen.input
+            else -> null
+        }
     }
 }

@@ -10,7 +10,7 @@ object DesktopLauncher {
     }
 
     private fun createApplication(): LwjglApplication {
-        return LwjglApplication(Game(), defaultConfiguration)
+        return LwjglApplication(Game, defaultConfiguration)
     }
 
     private val defaultConfiguration: LwjglApplicationConfiguration
