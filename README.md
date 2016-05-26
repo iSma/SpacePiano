@@ -21,7 +21,8 @@ This project uses [Gradle](http://gradle.org/) to manage dependencies. Gradle wr
 - `eclipse`: generates Eclipse project data.
 - `headless:run`: starts the headless application. Note: if headless sources were not modified - and the application still creates `ApplicationListener` from `core` project - this task might fail due to no graphics support.
 - `idea`: generates IntelliJ project data.
-- `pack`: packs GUI assets from `raw/ui`. Saves the atlas file at `assets/ui`.
+- `pack`: packs GUI assets from `raw/pack/*`. Saves the atlas file at `assets/*`.
+- `assets`: copy and pack all assets from `raw/` to `assets/`
 - `test`: runs unit tests (if any).
 
 Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.

@@ -40,3 +40,19 @@ tasks.eclipse.doLast {
   delete '.settings/'
 }
 
+import com.badlogic.gdx.tools.texturepacker.TexturePacker
+task pack << {
+  file('raw/pack/').listFiles().findAll { it.directory }.each {
+    TexturePacker.process(it.canonicalPath, 'assets/', it.name)
+  }
+}
+
+task copyAssets(type: Copy) {
+  from 'raw/copy'
+  into 'assets/'
+}
+
+task assets {
+  dependsOn copyAssets
+  dependsOn pack
+}

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import kotlin.reflect.KClass
 
 object R : AssetManager() {
-    val SKIN = A("ui/skin.json", Skin::class.java)
+    val SKIN = A("ui.json", Skin::class.java)
 
     init {
         loadNow(SKIN)
