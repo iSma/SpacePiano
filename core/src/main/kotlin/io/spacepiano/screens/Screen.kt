@@ -3,10 +3,16 @@ package io.spacepiano.screens
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.utils.viewport.FitViewport
+import io.spacepiano.Game
 
 abstract class Screen : Screen {
     val stage = Stage()
     open val input: InputProcessor = stage
+
+    init {
+        stage.viewport = FitViewport(Game.WIDTH, Game.HEIGHT)
+    }
 
     // Draw your screen here. "delta" is the time since last render in seconds.
     override fun render(delta: Float) {

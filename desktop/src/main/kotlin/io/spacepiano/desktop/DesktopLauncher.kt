@@ -17,8 +17,8 @@ object DesktopLauncher {
         get() {
             val configuration = LwjglApplicationConfiguration()
             configuration.title = "SpacePiano"
-            configuration.width = 640
-            configuration.height = 480
+            configuration.width = 768
+            configuration.height = 768
             return configuration
         }
 }

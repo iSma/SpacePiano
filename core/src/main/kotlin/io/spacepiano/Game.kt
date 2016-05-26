@@ -2,10 +2,15 @@ package io.spacepiano
 
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.GL20
 import io.spacepiano.screens.LoadingScreen
 import io.spacepiano.screens.Screen
 
 object  Game : Game() {
+    val NAME = "SpacePiano"
+    val WIDTH = 1024f
+    val HEIGHT = 1024f
+
     override fun create() {
         setScreen(LoadingScreen())
     }
@@ -17,5 +22,10 @@ object  Game : Game() {
             is Screen -> screen.input
             else -> null
         }
+    }
+
+    override fun render() {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+        super.render()
     }
 }
