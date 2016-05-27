@@ -10,7 +10,7 @@ class MainMenuScreen: MenuScreen() {
     init {
         val title = Menu(Game.NAME)
         val mainMenu = MainMenu(this)
-        val fadeAction = Actions.sequence(Actions.alpha(.5f), Actions.removeActor(title))
+        val fadeAction = Actions.sequence(Actions.fadeIn(.5f), Actions.removeActor(title))
 
         initMenu(title)
         stage.addActor(title)

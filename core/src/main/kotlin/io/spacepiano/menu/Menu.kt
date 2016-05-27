@@ -12,9 +12,10 @@ import com.badlogic.gdx.utils.Array
 import io.spacepiano.R
 import com.badlogic.gdx.scenes.scene2d.ui.List as UiList
 
-open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf()) : Table(R[R.SKIN]) {
-    val title = Label(title, R[R.SKIN], "title")
-    val list = com.badlogic.gdx.scenes.scene2d.ui.List<String>(R[R.SKIN], "menu")
+open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf(),
+                titleStyle: String = "title", menuStyle: String = "menu") : Table(R[R.SKIN]) {
+    val title = Label(title, R[R.SKIN], titleStyle)
+    val list = com.badlogic.gdx.scenes.scene2d.ui.List<String>(R[R.SKIN], menuStyle)
     val scroll = ScrollPane(list)
 
     val items: MutableList<String> = mutableListOf<String>()
@@ -56,6 +57,7 @@ open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf())
         padTop(32f).align(Align.top).add(this.title).row()
         add(scroll).align(Align.left).padTop(32f)
 
+        scroll.setScrollingDisabled(true, false)
         list.addListener(clickListener)
     }
 
@@ -75,20 +77,28 @@ open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf())
 
 
     private fun runSelected() {
-        if (list.selectedIndex > 0 && list.selectedIndex <= items.size)
+        if (list.selectedIndex >= 0 && list.selectedIndex <= items.size)
             actions[list.selectedIndex]()
     }
 
     private fun selectFirst() {
         list.selectedIndex = 0
+        scroll.scrollPercentY = 1f*list.selectedIndex/items.size
+        scroll()
     }
 
     private fun selectLast() {
         list.selectedIndex = items.size - 1
+        scroll()
     }
 
     private fun moveSelectionBy(direction: Int) {
         list.selectedIndex = (list.selectedIndex + items.size + direction) % items.size
+        scroll()
+    }
+
+    private fun scroll() {
+        scroll.scrollPercentY = 1.2f*list.selectedIndex/items.size
     }
 }
 

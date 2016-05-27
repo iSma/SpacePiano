@@ -57,7 +57,7 @@ open class MenuScreen: Screen() {
         )
 
     fun initMenu(menu: Menu) {
-        menu.width = stage.width/2
+        menu.width = stage.width
         menu.height = stage.height
         menu.setOrigin(Align.center)
         menu.setPosition(0f, 0f, Align.center)

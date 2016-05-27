@@ -82,6 +82,7 @@
     },
     "default": "five-S",
     "menu": "five-L",
+    "menu-small": "five-M",
     "title": "seven-L"
   },
   "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
@@ -197,10 +198,6 @@
     }
   },
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-    "menu": {
-      "font": "menu",
-      "fontColor": "white"
-    },
     "default": {
       "font": "default",
       "fontColor": "light_blue"
@@ -223,6 +220,12 @@
     },
     "menu": {
       "font": "menu",
+      "fontColorSelected": "red",
+      "fontColorUnselected": "white",
+      "selection": "white"
+    },
+    "menu-small": {
+      "font": "menu-small",
       "fontColorSelected": "red",
       "fontColorUnselected": "white",
       "selection": "white"
