@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.viewport.FitViewport
 import io.spacepiano.Game
 import io.spacepiano.R
 

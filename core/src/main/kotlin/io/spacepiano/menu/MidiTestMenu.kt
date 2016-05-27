@@ -1,16 +1,23 @@
-package io.spacepiano.midi
+package io.spacepiano.menu
 
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import io.spacepiano.Game
 import io.spacepiano.R
-import io.spacepiano.menu.Menu
-import io.spacepiano.menu.MenuScreen
-import io.spacepiano.screens.MainMenuScreen
-import javax.sound.midi.*
+import io.spacepiano.midi.*
+import javax.sound.midi.MidiMessage
+import javax.sound.midi.Receiver
+import javax.sound.midi.ShortMessage
 
-class MidiTestScreen : MenuScreen(), Receiver {
+class MidiTestMenu(screen: MenuScreen) : Menu("MIDI", menuStyle = "menu-small"), Receiver {
+    val back = {
+        screen.pop()
+        Midi.outputDevices.forEach { it.close() }
+        Midi.synth.close()
+        screen.input.removeProcessor(VirtualDevice.input)
+    }
+
     init {
         Midi.synth.open()
         val synthRcv = Midi.synth.receiver
@@ -24,28 +31,22 @@ class MidiTestScreen : MenuScreen(), Receiver {
 
         val items = Midi.synth.availableInstruments
                 .mapIndexed { i, instrument -> instrument.name to { Midi.synth.channels[0].programChange(i) } }
-                .plus("Back" to { Game.screen = MainMenuScreen() })
+                .plus("Back" to back)
 
-        val menu = Menu("MIDI", items, menuStyle = "menu-small")
-        push(menu)
-        input.addProcessor(VirtualDevice.input)
-    }
-
-    override fun dispose() {
-        super.dispose()
-        Midi.synth.close()
+        setItems(items)
+        screen.input.addProcessor(VirtualDevice.input)
     }
 
     override fun send(message: MidiMessage?, timeStamp: Long) {
         when (message) {
-            is ShortMessage -> if (message.command == 0x90) {
-                val label = Label(message.data1.toString(), R[R.SKIN], "title")
+            is ShortMessage -> if (message.on) {
+                val label = Label(message.pitch.toString(), R[R.SKIN], "title")
                 val action = Actions.sequence(
                         Actions.moveBy(0f, Game.HEIGHT, .5f, Interpolation.pow4In),
                         Actions.removeActor()
                 )
 
-                label.color.a = .2f + .8f*message.data2/127f
+                label.color.a = .2f + .8f*message.velocity/127f
                 label.setPosition(-Game.WIDTH/2, -Game.HEIGHT/2)
                 label.addAction(action)
                 stage.addActor(label)

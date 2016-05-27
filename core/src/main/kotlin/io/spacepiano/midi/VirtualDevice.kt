@@ -2,10 +2,12 @@ package io.spacepiano.midi
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
-import com.badlogic.gdx.InputProcessor
 import io.spacepiano.Game
-import javax.sound.midi.*
+import javax.sound.midi.MidiDevice
 import javax.sound.midi.MidiDevice.Info
+import javax.sound.midi.MidiMessage
+import javax.sound.midi.Receiver
+import javax.sound.midi.Transmitter
 
 object  VirtualDevice : MidiDevice {
     private val transmitters = mutableListOf<VirtualTransmitter>()

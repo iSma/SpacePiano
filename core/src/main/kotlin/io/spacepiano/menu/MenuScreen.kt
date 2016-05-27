@@ -1,15 +1,10 @@
 package io.spacepiano.menu
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
-import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.actions.IntAction
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.viewport.FitViewport
-import io.spacepiano.menu.Menu
 import io.spacepiano.screens.Screen
 import java.util.*
 

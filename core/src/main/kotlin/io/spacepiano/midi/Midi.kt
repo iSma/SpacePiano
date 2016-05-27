@@ -21,3 +21,14 @@ object  Midi {
     fun programChange(program: Int, channel: Int = 0) = ShortMessage(0xC0, channel, program and  0x7F, program shr 7)
 }
 
+val ShortMessage.pitch: Int
+    get() = data1
+
+val ShortMessage.velocity: Int
+    get() = data2
+
+val ShortMessage.on: Boolean
+    get() = command == 0x90
+
+val ShortMessage.off: Boolean
+    get() = command == 0x80

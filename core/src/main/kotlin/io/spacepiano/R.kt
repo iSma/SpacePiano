@@ -3,7 +3,6 @@ package io.spacepiano
 import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import kotlin.reflect.KClass
 
 object R : AssetManager() {
     val SKIN = A("ui.json", Skin::class.java)
