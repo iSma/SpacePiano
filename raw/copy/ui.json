@@ -81,6 +81,7 @@
       "file": "fonts/fixed-bold-64.fnt"
     },
     "default": "five-S",
+    "menu": "five-L",
     "title": "seven-L"
   },
   "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
@@ -196,9 +197,9 @@
     }
   },
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-    "optional": {
-      "font": "default",
-      "fontColor": "black"
+    "menu": {
+      "font": "menu",
+      "fontColor": "white"
     },
     "default": {
       "font": "default",
@@ -218,6 +219,12 @@
       "font": "default",
       "fontColorSelected": "blue",
       "fontColorUnselected": "light_blue",
+      "selection": "white"
+    },
+    "menu": {
+      "font": "menu",
+      "fontColorSelected": "red",
+      "fontColorUnselected": "white",
       "selection": "white"
     },
     "dimmed": {
