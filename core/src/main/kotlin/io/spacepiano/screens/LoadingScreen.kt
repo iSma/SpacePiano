@@ -14,7 +14,7 @@ class LoadingScreen : Screen() {
 
     var i = 0
     val spinAction = Actions.forever(Actions.sequence(
-            Actions.run { i = (i+1) % animation.size; spinner.setText(animation[i]) },
+            Actions.run { i = (i + 1) % animation.size; spinner.setText(animation[i]) },
             Actions.delay(.2f)
     ))
 

@@ -46,13 +46,14 @@ class MidiTestMenu(screen: MenuScreen) : Menu("MIDI", menuStyle = "menu-small"),
                         Actions.removeActor()
                 )
 
-                label.color.a = .2f + .8f*message.velocity/127f
-                label.setPosition(-Game.WIDTH/2, -Game.HEIGHT/2)
+                label.color.a = .2f + .8f * message.velocity / 127f
+                label.setPosition(-Game.WIDTH / 2, -Game.HEIGHT / 2)
                 label.addAction(action)
                 stage.addActor(label)
             }
         }
     }
 
-    override fun close() { }
+    override fun close() {
+    }
 }

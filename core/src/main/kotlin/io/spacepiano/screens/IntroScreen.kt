@@ -37,7 +37,7 @@ class IntroScreen : Screen() {
                 Actions.scaleTo(96f, 96f),
                 Actions.scaleTo(1f, 1f, 1.6f, Interpolation.exp10),
                 Actions.delay(.2f),
-                Actions.moveToAligned(0f, stage.height/2 - label.originY - 32f, Align.top, .8f, Interpolation.pow4In),
+                Actions.moveToAligned(0f, stage.height / 2 - label.originY - 32f, Align.top, .8f, Interpolation.pow4In),
                 Actions.delay(.8f),
                 Actions.run { done = true }
         )

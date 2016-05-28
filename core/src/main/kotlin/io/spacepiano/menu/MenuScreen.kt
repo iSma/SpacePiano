@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Align
 import io.spacepiano.screens.Screen
 import java.util.*
 
-open class MenuScreen: Screen() {
+open class MenuScreen : Screen() {
     override val input = InputMultiplexer(stage)
 
     val stack = Stack<Menu>()
@@ -27,7 +27,7 @@ open class MenuScreen: Screen() {
                 )
         )
 
-    val pushOutAction : Action
+    val pushOutAction: Action
         get() = Actions.sequence(
                 Actions.parallel(
                         Actions.fadeOut(FADE_DURATION, Interpolation.pow4Out),
@@ -45,7 +45,7 @@ open class MenuScreen: Screen() {
                 )
         )
 
-    val popOutAction : Action
+    val popOutAction: Action
         get() = Actions.parallel(
                 Actions.fadeOut(FADE_DURATION, Interpolation.pow4Out),
                 Actions.moveToAligned(+stage.width, 0f, Align.center, FADE_DURATION, Interpolation.pow4Out)

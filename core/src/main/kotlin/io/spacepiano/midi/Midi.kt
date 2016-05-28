@@ -4,7 +4,7 @@ import javax.sound.midi.MidiDevice
 import javax.sound.midi.MidiSystem
 import javax.sound.midi.ShortMessage
 
-object  Midi {
+object Midi {
     val synth = MidiSystem.getSynthesizer()
 
     val devices: List<MidiDevice>

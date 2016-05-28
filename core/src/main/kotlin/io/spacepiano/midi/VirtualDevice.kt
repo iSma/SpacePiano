@@ -9,7 +9,7 @@ import javax.sound.midi.MidiMessage
 import javax.sound.midi.Receiver
 import javax.sound.midi.Transmitter
 
-object  VirtualDevice : MidiDevice {
+object VirtualDevice : MidiDevice {
     private val transmitters = mutableListOf<VirtualTransmitter>()
     private val info = object : Info("VirtualDevice", Game.NAME, "", "1.0.0") {}
 
@@ -39,7 +39,7 @@ object  VirtualDevice : MidiDevice {
             if (!keyMap.containsKey(keycode))
                 return false
 
-            send(Midi.noteOn(keyMap.getOrElse(keycode, {0})))
+            send(Midi.noteOn(keyMap.getOrElse(keycode, { 0 })))
             return true
         }
 
@@ -47,7 +47,7 @@ object  VirtualDevice : MidiDevice {
             if (!keyMap.containsKey(keycode))
                 return false
 
-            send(Midi.noteOff(keyMap.getOrElse(keycode, {0})))
+            send(Midi.noteOff(keyMap.getOrElse(keycode, { 0 })))
             return true
         }
     }
@@ -59,8 +59,11 @@ object  VirtualDevice : MidiDevice {
     override fun getDeviceInfo(): Info? = info
 
     override fun isOpen() = true
-    override fun open() { }
-    override fun close() { }
+    override fun open() {
+    }
+
+    override fun close() {
+    }
 
     override fun getMaxTransmitters() = -1
     override fun getTransmitters() = transmitters

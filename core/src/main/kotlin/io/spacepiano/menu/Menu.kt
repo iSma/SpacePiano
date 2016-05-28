@@ -42,9 +42,15 @@ open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf(),
         override fun keyUp(keycode: Int): Boolean {
             when (keycode) {
                 Input.Keys.ENTER -> runSelected()
-                Input.Keys.ESCAPE -> { selectLast(); runSelected() }
-                Input.Keys.HOME -> { selectFirst() }
-                Input.Keys.END -> { selectLast() }
+                Input.Keys.ESCAPE -> {
+                    selectLast(); runSelected()
+                }
+                Input.Keys.HOME -> {
+                    selectFirst()
+                }
+                Input.Keys.END -> {
+                    selectLast()
+                }
                 else -> return false
             }
 
@@ -61,7 +67,7 @@ open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf(),
         list.addListener(clickListener)
     }
 
-    fun setItems(items: List<Pair<String, () -> Unit>>){
+    fun setItems(items: List<Pair<String, () -> Unit>>) {
         items.forEach {
             this.items.add(it.first)
             this.actions.add(it.second)
@@ -83,7 +89,7 @@ open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf(),
 
     private fun selectFirst() {
         list.selectedIndex = 0
-        scroll.scrollPercentY = 1f*list.selectedIndex/items.size
+        scroll.scrollPercentY = 1f * list.selectedIndex / items.size
         scroll()
     }
 
@@ -98,7 +104,7 @@ open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf(),
     }
 
     private fun scroll() {
-        scroll.scrollPercentY = 1.2f*list.selectedIndex/items.size
+        scroll.scrollPercentY = 1.2f * list.selectedIndex / items.size
     }
 }
 

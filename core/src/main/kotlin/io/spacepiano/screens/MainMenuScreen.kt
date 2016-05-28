@@ -6,7 +6,7 @@ import io.spacepiano.menu.MainMenu
 import io.spacepiano.menu.Menu
 import io.spacepiano.menu.MenuScreen
 
-class MainMenuScreen: MenuScreen() {
+class MainMenuScreen : MenuScreen() {
     init {
         val title = Menu(Game.NAME)
         val mainMenu = MainMenu(this)

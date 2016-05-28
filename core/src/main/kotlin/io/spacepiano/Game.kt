@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20
 import io.spacepiano.screens.LoadingScreen
 import io.spacepiano.screens.Screen
 
-object  Game : Game() {
+object Game : Game() {
     val NAME = "SpacePiano"
     val WIDTH = 1024f
     val HEIGHT = 1024f
