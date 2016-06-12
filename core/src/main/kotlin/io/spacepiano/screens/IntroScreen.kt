@@ -25,7 +25,7 @@ class IntroScreen : Screen() {
     }
 
     init {
-        val label = Label(Game.NAME, R[R.SKIN], "title")
+        val label = Label(Game.NAME, R[R.skin], "title")
         val title = TransformActor(label)
 
         label.setOrigin(Align.center)

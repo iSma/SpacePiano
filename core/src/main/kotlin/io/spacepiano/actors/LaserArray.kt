@@ -22,7 +22,7 @@ class LaserArray : Group() {
     private val shots: List<List<ParticleActor>>
 
     private val levels = listOf("laser-1", "laser-2", "laser-3", "laser-4", "laser-5", "fire-1", "fire-2")
-    private val pools = levels.map { ParticleEffectPool(R[R.EFFECTS[it]], 128, 128) }
+    private val pools = levels.map { ParticleEffectPool(R[R.effects[it]], 128, 128) }
 
     init {
         shots = pools.map { pool ->

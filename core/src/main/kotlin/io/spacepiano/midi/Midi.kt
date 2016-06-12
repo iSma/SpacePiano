@@ -1,7 +1,13 @@
 package io.spacepiano.midi
 
+import com.badlogic.gdx.assets.AssetLoaderParameters
+import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.assets.loaders.AsynchronousAssetLoader
+import com.badlogic.gdx.assets.loaders.FileHandleResolver
+import com.badlogic.gdx.files.FileHandle
 import javax.sound.midi.MidiDevice
 import javax.sound.midi.MidiSystem
+import javax.sound.midi.Sequence
 import javax.sound.midi.ShortMessage
 
 object Midi {
@@ -20,6 +26,26 @@ object Midi {
 
     fun noteOn(pitch: Int, velocity: Int = 127, channel: Int = 0) = ShortMessage(ShortMessage.NOTE_ON, channel, pitch, velocity)
     fun noteOff(pitch: Int, channel: Int = 0) = ShortMessage(ShortMessage.NOTE_OFF, channel, pitch, 0)
+
+	class Loader(resolver: FileHandleResolver) : AsynchronousAssetLoader<Sequence, Midi.Loader.Parameters>(resolver) {
+		var sequence: Sequence? = null
+
+		override fun loadAsync(manager: AssetManager?, fileName: String?, file: FileHandle?, parameter: Parameters?) {
+			sequence = null
+            println(fileName)
+            println(file?.file()?.absolutePath)
+			sequence = MidiSystem.getSequence(file?.file())
+		}
+
+		override fun loadSync(manager: AssetManager?, fileName: String?, file: FileHandle?, parameter: Parameters?): Sequence? {
+			val sequence = this.sequence
+			this.sequence = null
+			return sequence
+		}
+
+		override fun getDependencies(fileName: String?, file: FileHandle?, parameter: Parameters?) = null
+		class Parameters : AssetLoaderParameters<Sequence>()
+	}
 }
 
 val ShortMessage.pitch: Int

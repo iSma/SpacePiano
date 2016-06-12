@@ -9,17 +9,12 @@ import java.util.*
 class SpaceShip(val color: Color, val parts: List<List<String>>) : Transformable() {
     constructor(color: Color, partSpec: String) : this(color, partSpec.split(";").map { it.trim().split(" ") })
 
-    enum class Color {BLUE, GREEN, YELLOW, WHITE }
+    enum class Color {blue, green, yellow, white }
 
     val sprites: List<Sprite>
 
     init {
-        val atlas = when (color) {
-            Color.BLUE -> R[R.SHIP_BLUE]
-            Color.GREEN -> R[R.SHIP_GREEN]
-            Color.YELLOW -> R[R.SHIP_YELLOW]
-            Color.WHITE -> R[R.SHIP_WHITE]
-        }
+        val atlas = R[R.ships[color.name]]
 
         val sprites = mutableListOf<Sprite>()
 

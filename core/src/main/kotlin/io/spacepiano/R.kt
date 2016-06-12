@@ -2,25 +2,36 @@ package io.spacepiano
 
 import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import javax.sound.midi.Sequence
+import io.spacepiano.midi.Midi
 
 // TODO: make cleaner using reified type parameters and/or lazy
-object R : AssetManager() {
-    val SKIN = A("ui.json", Skin::class.java)
-    val SHIP_BLUE = A("ship-mod-blue.atlas", TextureAtlas::class.java)
-    val SHIP_GREEN = A("ship-mod-green.atlas", TextureAtlas::class.java)
-    val SHIP_YELLOW = A("ship-mod-yellow.atlas", TextureAtlas::class.java)
-    val SHIP_WHITE = A("ship-mod-white.atlas", TextureAtlas::class.java)
+object R : AssetManager(InternalFileHandleResolver()) {
+    val skin = A("ui.json", Skin::class.java)
 
-    val EFFECTS = listOf("fire-1", "fire-2", "laser-1", "laser-2", "laser-3", "laser-4", "laser-5").map {
+    val ships = listOf("blue", "green", "yellow", "white").map {
+        it to A("ship-mod-$it.atlas", TextureAtlas::class.java)
+    }.toMap()
+
+    val effects = listOf("fire-1", "fire-2", "laser-1", "laser-2", "laser-3", "laser-4", "laser-5").map {
         it to A("particles/$it.p", ParticleEffect::class.java)
     }.toMap()
 
+    val midi = listOf("ode-to-joy").map {
+        it to A("assets/midi/$it.mid", Sequence::class.java)
+    }.toMap()
+
     init {
-        loadNow(SKIN)
-        EFFECTS.values.forEach { load(it) }
+        setLoader(Sequence::class.java, Midi.Loader(fileHandleResolver))
+
+        loadNow(skin)
+        ships.values.forEach { load(it) }
+        effects.values.forEach { load(it) }
+        midi.values.forEach { load(it) }
     }
 
     fun loadNow(asset: AssetDescriptor<*>) {

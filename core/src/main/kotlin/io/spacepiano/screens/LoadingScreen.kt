@@ -8,7 +8,7 @@ import io.spacepiano.Game
 import io.spacepiano.R
 
 class LoadingScreen : Screen() {
-    val spinner = Label("", R[R.SKIN], "title")
+    val spinner = Label("", R[R.skin], "title")
     val animation =
             "[:....] [::...] [:::..] [::::.] [:::::] [.::::] [..:::] [...::] [....:] [.....]".split(" ")
 

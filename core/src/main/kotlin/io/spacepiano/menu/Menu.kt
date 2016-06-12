@@ -13,9 +13,9 @@ import io.spacepiano.R
 import com.badlogic.gdx.scenes.scene2d.ui.List as UiList
 
 open class Menu(title: String, items: List<Pair<String, () -> Unit>> = listOf(),
-                titleStyle: String = "title", menuStyle: String = "menu") : Table(R[R.SKIN]) {
-    val title = Label(title, R[R.SKIN], titleStyle)
-    val list = com.badlogic.gdx.scenes.scene2d.ui.List<String>(R[R.SKIN], menuStyle)
+                titleStyle: String = "title", menuStyle: String = "menu") : Table(R[R.skin]) {
+    val title = Label(title, R[R.skin], titleStyle)
+    val list = com.badlogic.gdx.scenes.scene2d.ui.List<String>(R[R.skin], menuStyle)
     val scroll = ScrollPane(list)
 
     val items: MutableList<String> = mutableListOf<String>()
