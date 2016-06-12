@@ -1,20 +1,36 @@
 package io.spacepiano.menu
 
-import com.badlogic.gdx.math.Interpolation
-import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import io.spacepiano.Game
-import io.spacepiano.R
-import io.spacepiano.midi.*
+import com.badlogic.gdx.Input
+import com.badlogic.gdx.InputAdapter
+import io.spacepiano.actors.LaserArray
+import io.spacepiano.midi.Midi
+import io.spacepiano.midi.VirtualDevice
 import javax.sound.midi.MidiMessage
 import javax.sound.midi.Receiver
 import javax.sound.midi.ShortMessage
 
 class MidiTestMenu(screen: MenuScreen) : Menu("MIDI", menuStyle = "menu-small"), Receiver {
+    val laserArray = LaserArray()
+
     val back = {
         screen.pop()
+        laserArray.remove()
         Midi.outputDevices.forEach { it.close() }
         screen.input.removeProcessor(VirtualDevice.input)
+        screen.input.removeProcessor(inputChangeLaser)
+    }
+
+    val inputChangeLaser = object : InputAdapter() {
+        override fun keyDown(keycode: Int): Boolean {
+            if (keycode == Input.Keys.LEFT)
+                laserArray.level--
+            else if (keycode == Input.Keys.RIGHT)
+                laserArray.level++
+            else
+                return false
+
+            return true
+        }
     }
 
     init {
@@ -32,23 +48,17 @@ class MidiTestMenu(screen: MenuScreen) : Menu("MIDI", menuStyle = "menu-small"),
                 .plus("Back" to back)
 
         setItems(items)
+
+        laserArray.setPosition(0f, -screen.stage.height/2)
+        screen.stage.addActor(laserArray)
+
         screen.input.addProcessor(VirtualDevice.input)
+        screen.input.addProcessor(inputChangeLaser)
     }
 
     override fun send(message: MidiMessage?, timeStamp: Long) {
         when (message) {
-            is ShortMessage -> if (message.on) {
-                val label = Label(message.pitch.toString(), R[R.SKIN], "title")
-                val action = Actions.sequence(
-                        Actions.moveBy(0f, Game.HEIGHT, .5f, Interpolation.pow4In),
-                        Actions.removeActor()
-                )
-
-                label.color.a = .2f + .8f * message.velocity / 127f
-                label.setPosition(-Game.WIDTH / 2, -Game.HEIGHT / 2)
-                label.addAction(action)
-                stage.addActor(label)
-            }
+            is ShortMessage -> laserArray.shoot(message)
         }
     }
 

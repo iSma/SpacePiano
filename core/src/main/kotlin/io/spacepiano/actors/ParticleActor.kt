@@ -12,4 +12,6 @@ class ParticleActor(val effect: ParticleEffect) : Transformable() {
     }
 
     fun start() = effect.start()
+
+    fun allowCompletion() = effect.allowCompletion()
 }
