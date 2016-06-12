@@ -1,6 +1,6 @@
 package io.spacepiano.midi
 
-import javax.sound.midi.MidiMessage
+import javax.sound.midi.ShortMessage
 
 class TrackPlayer(val track: Track) {
     private var lastUpdate = 0L
@@ -9,7 +9,7 @@ class TrackPlayer(val track: Track) {
     val notes: List<Note>
         get() = timeFrame.flatMap { track.byTime[it].orEmpty() }
 
-    val messages: List<MidiMessage>
+    val messages: List<ShortMessage>
         get() = timeFrame.flatMap { track.messages[it].orEmpty() }
 
     fun update(delta: Float) {

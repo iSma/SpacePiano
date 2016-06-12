@@ -3,6 +3,7 @@ package io.spacepiano.menu
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import io.spacepiano.Game
+import io.spacepiano.screens.GameScreen
 
 class MainMenu(screen: MenuScreen) : Menu(Game.NAME) {
     init {
@@ -11,7 +12,7 @@ class MainMenu(screen: MenuScreen) : Menu(Game.NAME) {
                     Actions.delay(.2f),
                     Actions.fadeOut(.2f),
                     Actions.delay(.4f),
-                    Actions.run { }
+                    Actions.run { Game.screen = GameScreen(); screen.dispose() }
             )
             screen.pop(action)
         }
