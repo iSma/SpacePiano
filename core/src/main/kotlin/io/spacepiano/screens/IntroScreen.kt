@@ -12,7 +12,7 @@ import io.spacepiano.actors.TransformActor
 class IntroScreen : Screen() {
     var done = false
 
-    override val input = object : InputAdapter() {
+    val inputSkip = object : InputAdapter() {
         override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
             done = true
             return true
@@ -43,6 +43,7 @@ class IntroScreen : Screen() {
         )
 
         title.addAction(action)
+        input.addProcessor(inputSkip)
     }
 
     override fun render(delta: Float) {

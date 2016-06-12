@@ -1,6 +1,6 @@
 package io.spacepiano.screens
 
-import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.FitViewport
@@ -8,7 +8,7 @@ import io.spacepiano.Game
 
 abstract class Screen : Screen {
     val stage = Stage()
-    open val input: InputProcessor = stage
+    val input = InputMultiplexer(stage)
 
     init {
         stage.viewport = FitViewport(Game.WIDTH, Game.HEIGHT)

@@ -1,6 +1,5 @@
 package io.spacepiano.menu
 
-import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
@@ -9,8 +8,6 @@ import io.spacepiano.screens.Screen
 import java.util.*
 
 open class MenuScreen : Screen() {
-    override val input = InputMultiplexer(stage)
-
     val stack = Stack<Menu>()
 
     val FADE_DURATION = .3f
