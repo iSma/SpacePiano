@@ -14,12 +14,10 @@ class MidiTestMenu(screen: MenuScreen) : Menu("MIDI", menuStyle = "menu-small"),
     val back = {
         screen.pop()
         Midi.outputDevices.forEach { it.close() }
-        Midi.synth.close()
         screen.input.removeProcessor(VirtualDevice.input)
     }
 
     init {
-        Midi.synth.open()
         val synthRcv = Midi.synth.receiver
         Midi.outputDevices.forEach {
             it.close()

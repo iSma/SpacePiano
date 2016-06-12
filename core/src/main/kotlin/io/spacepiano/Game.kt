@@ -3,6 +3,7 @@ package io.spacepiano
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
+import io.spacepiano.midi.Midi
 import io.spacepiano.screens.LoadingScreen
 import io.spacepiano.screens.Screen
 
@@ -12,6 +13,7 @@ object Game : Game() {
     val HEIGHT = 1024f
 
     override fun create() {
+        Midi.synth.open()
         setScreen(LoadingScreen())
     }
 
@@ -27,5 +29,9 @@ object Game : Game() {
     override fun render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         super.render()
+    }
+
+    override fun dispose() {
+        Midi.synth.close()
     }
 }
